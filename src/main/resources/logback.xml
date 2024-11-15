@@ -1,0 +1,29 @@
+<configuration>
+    <!-- Define the file appender with a SizeAndTimeBasedRollingPolicy -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Main log file -->
+        <file>logs/app.log</file>
+
+        <!-- Define the rolling policy -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Log file pattern with date and index for size-based rotation -->
+            <fileNamePattern>logs/app-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- Maximum file size before rolling to a new file on the same day -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- Number of days to retain the logs -->
+            <maxHistory>30</maxHistory>
+            <!-- Maximum total size for all archived files -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+
+        <!-- Log output pattern -->
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger configuration -->
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
